@@ -1,62 +1,83 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Ponto</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0066cc">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="favicon.ico"> <!-- Adicionando Favicon -->
-
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            display: flex;
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-            background: linear-gradient(180deg, #002b5b, #004488, #0066cc, #0088ff);
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        #logo {
-            width: 120px;
-            margin-bottom: 20px;
-        }
-
-        .btn-abrir {
-            padding: 15px 30px;
-            background: #0057b7;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            display: inline-block;
-            text-align: center;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-abrir:hover {
-            background: #003f8a;
-            transform: scale(1.05);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ponto</title>
+  <meta name="theme-color" content="#0066cc">
+  <meta name="description" content="Sistema de registro de ponto digital">
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- iOS meta tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ponto">
+  <link rel="apple-touch-icon" href="/icon-192x192.png">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+    
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+    }
+    
+    .btn {
+      padding: 12px 24px;
+      background-color: #0066cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .loading {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <section class="container">
-        <img id="logo" src="icon-512.png" alt="Logo">
-        <a href="https://www.registropontoseed.pr.gov.br" class="btn-abrir">
-            Abrir Sistema Ponto
-        </a>
-    </section>
+  <img src="icon-512x512.png" alt="Logo Ponto" class="logo">
+  <h1>Sistema Ponto</h1>
+  <p>Clique no botão abaixo para acessar o sistema</p>
+  
+  <button class="btn" id="acessarBtn">Acessar Sistema</button>
+  <p class="loading" id="loadingText">Redirecionando...</p>
+
+  <script>
+    // Registra o Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registrado com sucesso');
+          })
+          .catch(err => {
+            console.log('Falha ao registrar ServiceWorker:', err);
+          });
+      });
+    }
+
+    // Redirecionamento para o sistema
+    document.getElementById('acessarBtn').addEventListener('click', () => {
+      document.getElementById('loadingText').style.display = 'block';
+      window.location.href = 'https://www.registropontoseed.pr.gov.br';
+    });
+  </script>
 </body>
 </html>
