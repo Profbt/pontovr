@@ -9,15 +9,34 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 20px;
+      background: linear-gradient(180deg, #002b5b, #004488, #0066cc, #0088ff);
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     h1 {
-      color: #cc0000;
+      color: #ffffff;
+    }
+    .btn {
+      padding: 12px 24px;
+      background-color: #249203;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
     }
   </style>
 </head>
 <body>
   <h1>Você está offline</h1>
   <p>O sistema Ponto requer conexão com a internet.</p>
-  <p>Por favor, verifique sua conexão e tente novamente.</p>
+  <p>Suas ações serão sincronizadas quando a conexão for restabelecida.</p>
+  <button class="btn" onclick="window.location.reload()">Tentar novamente</button>
 </body>
 </html>

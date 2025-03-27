@@ -1,25 +1,25 @@
-const CACHE_NAME = 'ponto-cache-v1';
+const CACHE_NAME = 'ponto-cache-v2';
 const OFFLINE_URL = '/offline.html';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/icon-192x192.png',
-  '/icon-512x512.png',
-  '/styles/main.css'
+  '/icon-192.png',
+  '/icon-512.png',
+  '/maskable-icon-192.png',
+  '/maskable-icon-512.png',
+  '/offline.html'
 ];
 
-// Instalação do Service Worker
+// Instalação com cache de recursos essenciais
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(PRECACHE_URLS);
-      })
+      .then(cache => cache.addAll(PRECACHE_URLS))
       .then(() => self.skipWaiting())
   );
 });
 
-// Ativação do Service Worker
+// Ativação e limpeza de caches antigos
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -34,7 +34,7 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Estratégia de cache: Network Falling Back to Cache
+// Estratégia de cache: Network First, fallback para cache
 self.addEventListener('fetch', event => {
   if (event.request.mode === 'navigate') {
     event.respondWith(
@@ -44,7 +44,28 @@ self.addEventListener('fetch', event => {
   } else {
     event.respondWith(
       caches.match(event.request)
-        .then(response => response || fetch(event.request))
+        .then(cachedResponse => {
+          const fetchPromise = fetch(event.request)
+            .then(networkResponse => {
+              // Atualiza o cache
+              caches.open(CACHE_NAME)
+                .then(cache => cache.put(event.request, networkResponse.clone()));
+              return networkResponse;
+            });
+          return cachedResponse || fetchPromise;
+        })
     );
   }
 });
+
+// Background Sync (para ações pendentes)
+self.addEventListener('sync', event => {
+  if (event.tag === 'sync-actions') {
+    event.waitUntil(handleBackgroundSync());
+  }
+});
+
+async function handleBackgroundSync() {
+  // Implemente sua lógica de sincronização aqui
+  console.log('Background sync realizado');
+}
