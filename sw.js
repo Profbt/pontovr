@@ -19,3 +19,17 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
+
+const CACHE_NAME = 'ponto-cache-v1';
+const CACHED_URLS = [
+  'index.html',  // Apenas a página principal
+  // Não inclua imagens externas!
+];
+
+self.addEventListener('fetch', (event) => {
+  if (event.request.url === 'https://www.registropontoseed.pr.gov.br') {
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match('index.html'))
+    );
+  }
+});
