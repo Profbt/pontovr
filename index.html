@@ -23,9 +23,8 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #f5f5f5;
-      text-align: center;
       background: linear-gradient(180deg, #002b5b, #004488, #0066cc, #0088ff);
+      text-align: center;
     }
     
     .logo {
@@ -36,12 +35,11 @@
     
     .btn {
       padding: 12px 24px;
-      background-color: #26a001;
       color: white;
       text-decoration: none;
       border-radius: 8px;
       font-size: 18px;
-      margin-top: 20px;
+      margin-top: 15px;
       border: none;
       cursor: pointer;
       display: inline-block;
@@ -50,22 +48,43 @@
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     }
 
-    .btn-abrir:hover {
-            background: #003f8a;
-            transform: scale(1.05);
-        }
-    
+    /* Botão do sistema de ponto */
+    .btn-ponto {
+      background-color: #249203;
+    }
+
+    .btn-ponto:hover {
+      background: #1c7402;
+      transform: scale(1.05);
+    }
+
+    /* Botão do Mural do Professor */
+    .btn-mural {
+      background-color: #003f8a;
+    }
+
+    .btn-mural:hover {
+      background: #002b6b;
+      transform: scale(1.05);
+    }
+
     .loading {
       display: none;
-      margin-top: 20px;
+      margin-top: 10px;
+      font-weight: bold;
+      color: white;
     }
   </style>
 </head>
 <body>
   <img src="icon-512.png" alt="Logo Ponto" class="logo">
   
+  <!-- Botão do sistema de ponto -->
+  <button class="btn btn-ponto" id="acessarPonto">Acessar Sistema Ponto</button>
   
-  <button class="btn" id="acessarBtn">Acessar Sistema Ponto</button>
+  <!-- Botão do mural do professor -->
+  <button class="btn btn-mural" id="acessarMural">Acessar Mural do Professor</button>
+
   <p class="loading" id="loadingText">Redirecionando...</p>
 
   <script>
@@ -82,10 +101,16 @@
       });
     }
 
-    // Redirecionamento para o sistema
-    document.getElementById('acessarBtn').addEventListener('click', () => {
+    // Redirecionamento para o sistema de ponto
+    document.getElementById('acessarPonto').addEventListener('click', () => {
       document.getElementById('loadingText').style.display = 'block';
       window.location.href = 'https://www.registropontoseed.pr.gov.br';
+    });
+
+    // Redirecionamento para o mural do professor
+    document.getElementById('acessarMural').addEventListener('click', () => {
+      document.getElementById('loadingText').style.display = 'block';
+      window.location.href = 'https://sites.google.com/escola.pr.gov.br/muraldoprofessorvicenterijo';
     });
   </script>
 </body>
