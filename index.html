@@ -1,59 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <title>Ponto</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0066cc">
     <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="favicon.ico"> <!-- Adicionando Favicon -->
+
     <style>
         body { 
             font-family: Arial, sans-serif; 
+            display: flex;
             justify-content: center; 
             align-items: center; 
             height: 100vh; 
             margin: 0; 
-            background: #f5f5f5; 
-            background: rgb(2,0,36);
-background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 82%, rgba(227,210,8,1) 100%);
-        }
-        .btn-abrir {
-            padding: 15px 30px;
-            background: #0066cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(180deg, #002b5b, #004488, #0066cc, #0088ff);
         }
 
         .container {
-          justify-content: center;
-          align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         #logo {
-          width: 30%;
-          margin-bottom: 30px;
-          justify-content: center;
-          align-items: center;
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        .btn-abrir {
+            padding: 15px 30px;
+            background: #0057b7;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            display: inline-block;
+            text-align: center;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-abrir:hover {
+            background: #003f8a;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
- <section class="container">
-  <div class="imagem">
-    <img id="logo" src="icon-512.png" alt="">
-    </div>
-     </section>
-
-     <section>
-      <div>
+    <section class="container">
+        <img id="logo" src="icon-192.png" alt="Logo">
         <a href="https://www.registropontoseed.pr.gov.br" class="btn-abrir">
-          Abrir Sistema Ponto
-      </a>
-      </div>
-     </section>
+            Abrir Sistema Ponto
+        </a>
+    </section>
 </body>
 </html>
